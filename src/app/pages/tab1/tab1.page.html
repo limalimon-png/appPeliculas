@@ -1,0 +1,34 @@
+
+
+<ion-content [fullscreen]="true">
+  <ion-grid fixed>
+    <ion-row>
+      
+      <ion-col>
+        <H3>Peliculas Nuevas</H3>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <app-slide-nuevo [peliculas]="peliculasRecientes"></app-slide-nuevo>
+  <ion-grid fixed>
+    <ion-row>
+      
+      <ion-col>
+        <H3>Cartelera</H3>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+<app-poster [peliculas]="peliculasRecientes"></app-poster>
+  
+
+<ion-grid fixed>
+  <ion-row>
+    
+    <ion-col>
+      <H3>Populares</H3>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+<app-poster [peliculas]="peliculasPopulares"></app-poster>
+</ion-content>

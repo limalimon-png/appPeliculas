@@ -1,0 +1,14 @@
+<ion-slides mode="ios" pager="ios" scrollbar="ios" class="ion-padding">
+  <ion-slide 
+  *ngFor="let peli of peliculas"
+  >
+  <ion-card button>
+    <img [src]="peli.backdrop_path | imagen2">
+    <ion-card-content>
+      {{peli.title}}
+    </ion-card-content>
+  </ion-card>
+  
+
+  </ion-slide>
+</ion-slides>
