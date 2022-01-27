@@ -10,6 +10,7 @@ const lenguaje:string='languaje=es&include_image_languaje=es';
   providedIn: 'root'
 })
 export class PeliculasService {
+  private popularesPage:number=1;
 
   constructor(private http:HttpClient) { }
   
@@ -26,6 +27,11 @@ export class PeliculasService {
 
   getPopulares(){
 
-    return this.http.get<Cartelera>(`${environment.url}/discover/movie?${'sort_by=popularity.desc'}&api_key=${environment.apiKey}&${lenguaje}`);
+    return this.http.get<Cartelera>(`${environment.url}/discover/movie?${'sort_by=popularity.desc'}&api_key=${environment.apiKey}&${lenguaje}&page=${this.popularesPage}`);
+  }
+
+  setPagina(numero:number){
+    this.popularesPage+=numero;
+
   }
 }

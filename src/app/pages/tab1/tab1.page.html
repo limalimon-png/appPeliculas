@@ -1,34 +1,16 @@
 
+<ion-content>
 
-<ion-content [fullscreen]="true">
-  <ion-grid fixed>
-    <ion-row>
-      
-      <ion-col>
-        <H3>Peliculas Nuevas</H3>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+<app-grids titulo="Peliculas Nuevas"></app-grids>
 
   <app-slide-nuevo [peliculas]="peliculasRecientes"></app-slide-nuevo>
-  <ion-grid fixed>
-    <ion-row>
-      
-      <ion-col>
-        <H3>Cartelera</H3>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+  <app-grids titulo="Cartelera"></app-grids>
 <app-poster [peliculas]="peliculasRecientes"></app-poster>
   
 
-<ion-grid fixed>
-  <ion-row>
-    
-    <ion-col>
-      <H3>Populares</H3>
-    </ion-col>
-  </ion-row>
-</ion-grid>
+<app-grids titulo="prueba"></app-grids>
 <app-poster [peliculas]="peliculasPopulares"></app-poster>
+<app-grids titulo="Populares"></app-grids>
+<app-pares [peliculas]="peliculasPopulares"
+(masPelis)="cargarMas()"></app-pares>
 </ion-content>

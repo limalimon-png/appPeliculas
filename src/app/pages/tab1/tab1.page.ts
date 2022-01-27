@@ -22,14 +22,33 @@ export class Tab1Page implements OnInit{
      }
     
    );
+   this.getPopulares();
 
-   this.peliculas.getPopulares().subscribe(
-    resp=>{
-      this.peliculasPopulares=resp.results;
-    }
    
-  );
   }
   
+  cargarMas(){
+    this.peliculas.setPagina(1);
+    this.getPopulares();
+    
+
+  }
+  getPopulares(){
+    this.peliculas.getPopulares().subscribe(
+      resp=>{
+        
+        if(this.peliculasPopulares.length===0){
+          this.peliculasPopulares=resp.results;
+          console.log("no hay");
+        }else{
+          this.peliculasPopulares=[ ...this.peliculasPopulares, ...resp.results];
+          console.log("si hay");}
+          
+      }
+     
+    );
+
+  }
+
 
 }

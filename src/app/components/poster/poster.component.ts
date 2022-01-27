@@ -11,7 +11,8 @@ export class PosterComponent implements OnInit {
 
 slideOpts={
 slidesPerView:3.3,
-freeMode:true
+freeMode:true,
+spaceBetween: -10
 };
   constructor() { }
 
