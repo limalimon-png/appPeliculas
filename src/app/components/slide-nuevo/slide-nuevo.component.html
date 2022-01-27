@@ -2,7 +2,7 @@
   <ion-slide 
   *ngFor="let peli of peliculas"
   >
-  <ion-card button>
+  <ion-card button (click)="modalDetalle(peli)">
     <img [src]="peli.backdrop_path | imagen2">
     <ion-card-content>
       {{peli.title}}

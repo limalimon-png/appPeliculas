@@ -2,7 +2,7 @@
   <ion-slide class="poster"
   *ngFor="let peli of peliculas"
   >
-    <ion-card button>
+    <ion-card button (click)="modalDetalle(peli)">
       
       <img [src]="peli.poster_path | imagen2" >
     </ion-card>

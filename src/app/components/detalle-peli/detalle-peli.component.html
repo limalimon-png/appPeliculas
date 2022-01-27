@@ -1,3 +1,120 @@
-<p>
-  detalle-peli works!
-</p>
+<ion-header>
+    <ion-toolbar>
+        <ion-title>Detalle</ion-title>
+        <ion-buttons slot="start" mode="ios">
+            <ion-back-button defaultHref="" (click)="regresar()"></ion-back-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+
+    <ion-label class="titulo"><h1>{{detalles.title}}</h1></ion-label>
+    <img [src]="detalles.backdrop_path | imagen2">
+    <ion-grid fixed>
+        <ion-row>
+            <ion-col size="4" class="poster-detalle-sobre">
+
+                <img [src]="detalles.poster_path | imagen2" class="poster">
+           
+            </ion-col>
+
+            <ion-col >
+                <ion-item>
+                    
+                    <ion-icon slot="start" name="thumbs-up" color="primary"></ion-icon>
+                    <ion-label>Rating</ion-label>
+                    <ion-note slot="end" color="primary">{{detalles.vote_average}}</ion-note>
+
+                </ion-item>
+                <ion-item>
+                    
+                    <ion-icon slot="start" name="accessibility-outline" color="primary"></ion-icon>
+                    <ion-label>Votos</ion-label>
+                    <ion-note slot="end" color="primary">{{detalles.vote_count}}</ion-note>
+
+                </ion-item>
+
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+    <ion-grid fixed>
+        <ion-row>
+
+            <ion-col size="12">
+
+                <ion-label>
+                    <p>Overview:</p>
+                    <!-- slice en caso de que sea mas de 150 se corta -->
+                    <h5>{{detalles.overview | slice: 0:textoOculto}}...</h5>
+                </ion-label>
+                <ion-label (click)="onClick()" *ngIf="(detalles.overview | slice: 0:150) !== detalles.overview" color="primary">{{toggleLeer}}</ion-label>
+
+            </ion-col>
+          
+        </ion-row>
+
+
+
+        <ion-row>
+            <ion-col size="12">
+
+                <ion-chip color="primary" mode="ios" outline="true"
+                *ngFor="let genero of detalles.genres"
+                >
+                    <ion-label>{{genero.name}}</ion-label>
+                </ion-chip>
+
+
+
+            </ion-col>
+        </ion-row>
+
+    </ion-grid>
+
+    <ion-grid fixed>
+        <ion-row>
+            
+            <ion-col >
+                <ion-label>Actores</ion-label>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+  
+
+                <ion-slides [options]="slidesOptions" >
+        
+                    <ion-slide *ngFor="let actor of creditosDetalle " class="slideForzar"   >
+                        
+                    <!-- class="md swiper-slide swiper-zoom-container hydrated" -->
+                        <ion-card class="card-actor" >
+                            
+                            
+                            <img *ngIf="!actor.profile_path" src="/assets/no-avatar.jpg" >
+                            <img *ngIf="actor.profile_path" [src]="actor.profile_path|imagen2" >
+                            <ion-card-subtitle>{{actor.name}} </ion-card-subtitle>
+                            
+                        </ion-card>
+                        
+            
+                    </ion-slide>
+                </ion-slides>
+
+               
+
+
+
+ <!-- fab placed to the bottom end -->
+ <ion-fab vertical="bottom" horizontal="end" slot="fixed" color="primary" (click)="favorito()">
+    <ion-fab-button color="favorite">
+      <ion-icon name="heart-outline"  color="danger"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+            
+    
+
+
+</ion-content>

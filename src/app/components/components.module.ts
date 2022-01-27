@@ -6,17 +6,21 @@ import { SlideNuevoComponent } from './slide-nuevo/slide-nuevo.component';
 import { PosterComponent } from './poster/poster.component';
 import { ParesComponent } from './pares/pares.component';
 import { GridsComponent } from './grids/grids.component';
+import { DetallePeliComponent } from './detalle-peli/detalle-peli.component';
 
 
 
 @NgModule({
-  declarations: [SlideNuevoComponent,PosterComponent,ParesComponent,GridsComponent],
+  entryComponents:[DetallePeliComponent],
+  declarations: [SlideNuevoComponent,PosterComponent,ParesComponent,GridsComponent,DetallePeliComponent],
   imports: [
     CommonModule,
     IonicModule,
     PipesModule,
+    
+
   
   ],
-  exports:[SlideNuevoComponent,PosterComponent,ParesComponent,GridsComponent]
+  exports:[SlideNuevoComponent,PosterComponent,ParesComponent,GridsComponent,DetallePeliComponent]
 })
 export class ComponentsModule { }

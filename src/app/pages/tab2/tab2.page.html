@@ -1,10 +1,16 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 2
+      Buscar pelicula
     </ion-title>
   </ion-toolbar>
 </ion-header>
+<ion-toolbar>
+  <ion-searchbar placeholder="BuscarPelicula" inputmode="text" type="text" (ionChange)="buscar($event)" mode="ios"
+  [debounce]="700" showCancelButton="focus"
+  [value]="textoBuscar"
+  ></ion-searchbar>
+</ion-toolbar>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
@@ -13,5 +19,32 @@
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+  <!-- <ion-spinner name="crescent" [hidden]="" ></ion-spinner> -->
+
+  <ion-list *ngIf="peliculasEncontradas.length===0">
+    <ion-list-header>
+      <ion-label>Busquedas populares:</ion-label>
+     
+    </ion-list-header>
+    <ion-item *ngFor="let titulos of peliculasPopulares" detail>
+
+      <ion-label  class="colorLetra" (click)="escribirEnElBuscador(titulos.title)">{{titulos.title|slice:0:30}}</ion-label>
+
+    </ion-item>
+  </ion-list>
+
+
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col size="6" *ngFor="let pelicula of peliculasEncontradas">
+        <ion-card (click)="modalDetalle(pelicula)">
+          <img [src]="pelicula.poster_path|imagen2" >
+        </ion-card>
+        <ion-card-subtitle>{{pelicula.title}}</ion-card-subtitle>
+      </ion-col>
+      
+    </ion-row>
+  </ion-grid>
+
+
 </ion-content>

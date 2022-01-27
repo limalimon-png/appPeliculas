@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Result } from 'src/app/interfaces';
+import { DetallePeliComponent } from '../detalle-peli/detalle-peli.component';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-pares',
@@ -18,7 +20,7 @@ export class ParesComponent implements OnInit {
     };
 
 
-  constructor() { }
+  constructor(private modalController:ModalController) { }
 
   
 
@@ -31,4 +33,15 @@ export class ParesComponent implements OnInit {
     this.masPelis.emit();
   }
 
+
+  async modalDetalle(peli) {
+    const modal = await this.modalController.create({
+      component: DetallePeliComponent,
+      componentProps:{
+        peli
+      }
+  
+    });
+    return await modal.present();
+  }
 }

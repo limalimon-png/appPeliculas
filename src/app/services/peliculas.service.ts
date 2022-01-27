@@ -1,7 +1,7 @@
 import { environment } from './../../environments/environment';
 import { Injectable } from '@angular/core';
 import { HttpClient,  } from '@angular/common/http';
-import { Cartelera } from '../interfaces/index';
+import { Cartelera, CreditosDetalle, PeliculaDetalle } from '../interfaces/index';
 
 
 const lenguaje:string='languaje=es&include_image_languaje=es';
@@ -34,4 +34,15 @@ export class PeliculasService {
     this.popularesPage+=numero;
 
   }
+
+  getPeliculaDetalle(id :number){
+    return this.http.get<PeliculaDetalle>(`${environment.url}/movie/${id}?api_key=${environment.apiKey}`);
+  }
+  getCreditosDetalle(id :number){
+    return this.http.get<CreditosDetalle>(`${environment.url}/movie/${id}/credits?api_key=${environment.apiKey}`);
+  }
+  getBusqueda(query :string){
+    return this.http.get<Cartelera>(`${environment.url}/search/movie?query=${query}&api_key=${environment.apiKey}`);
+  }
+  
 }

@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Cartelera } from 'src/app/interfaces';
+import { ModalController } from '@ionic/angular';
+
 import { Result } from '../../interfaces/index';
+import { DetallePeliComponent } from '../detalle-peli/detalle-peli.component';
 
 @Component({
   selector: 'app-slide-nuevo',
@@ -10,8 +12,20 @@ import { Result } from '../../interfaces/index';
 export class SlideNuevoComponent implements OnInit {
 
   @Input() peliculas:Result[]=[];
-  constructor() { }
+  constructor(private modalController: ModalController) { }
 
   ngOnInit() {}
 
+
+
+  async modalDetalle(peli) {
+    const modal = await this.modalController.create({
+      component: DetallePeliComponent,
+      componentProps:{
+        peli
+      }
+  
+    });
+    return await modal.present();
+  }
 }
