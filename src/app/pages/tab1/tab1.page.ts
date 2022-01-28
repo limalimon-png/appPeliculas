@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { Result } from 'src/app/interfaces';
 import { PeliculasService } from '../../services/peliculas.service';
 
@@ -10,11 +10,11 @@ import { PeliculasService } from '../../services/peliculas.service';
 })
 export class Tab1Page implements OnInit{
   logoPath:string='https://image.tmdb.org/t/p/w500/';
-
+  @Output() enviar;
   peliculasRecientes:Result[]=[];
   peliculasPopulares:Result[]=[];
   
-  constructor(private peliculas:PeliculasService) {}
+  constructor(private peliculas:PeliculasService,) {}
   ngOnInit(){
    this.peliculas.getcartelera().subscribe(
      resp=>{
@@ -49,6 +49,11 @@ export class Tab1Page implements OnInit{
     );
 
   }
+
+  cargarDatos(event){
+    console.log('tab1Enviar',event);
+   
+     }
 
 
 }

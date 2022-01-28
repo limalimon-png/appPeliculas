@@ -3,14 +3,14 @@
 
 <app-grids titulo="Peliculas Nuevas"></app-grids>
 
-  <app-slide-nuevo [peliculas]="peliculasRecientes"></app-slide-nuevo>
+  <app-slide-nuevo [peliculas]="peliculasRecientes" (load)="cargarDatos($event)"></app-slide-nuevo>
   <app-grids titulo="Cartelera"></app-grids>
-<app-poster [peliculas]="peliculasRecientes"></app-poster>
+<app-poster [peliculas]="peliculasRecientes" (load)="cargarDatos($event)"></app-poster>
   
 
 <app-grids titulo="prueba"></app-grids>
-<app-poster [peliculas]="peliculasPopulares"></app-poster>
+<app-poster [peliculas]="peliculasPopulares" (load)="cargarDatos($event)"></app-poster>
 <app-grids titulo="Populares"></app-grids>
 <app-pares [peliculas]="peliculasPopulares"
-(masPelis)="cargarMas()"></app-pares>
-</ion-content>
+(masPelis)="cargarMas()" (load)="cargarDatos($event)" ></app-pares>
+</ion-content >

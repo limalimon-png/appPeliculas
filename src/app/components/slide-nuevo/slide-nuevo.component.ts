@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 
 import { Result } from '../../interfaces/index';
@@ -12,6 +12,8 @@ import { DetallePeliComponent } from '../detalle-peli/detalle-peli.component';
 export class SlideNuevoComponent implements OnInit {
 
   @Input() peliculas:Result[]=[];
+  //para actualizar los datos cuando cambiamos en el modal, emitimos un evento en el dismiss
+@Output() load = new EventEmitter<boolean>();
   constructor(private modalController: ModalController) { }
 
   ngOnInit() {}
@@ -25,6 +27,10 @@ export class SlideNuevoComponent implements OnInit {
         peli
       }
   
+    });
+    //aqui lo llamamos y lo emitimos
+    modal.onDidDismiss().then(data => {
+      this.load.emit(true);
     });
     return await modal.present();
   }

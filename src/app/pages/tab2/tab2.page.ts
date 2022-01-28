@@ -56,7 +56,14 @@ this.textoBuscar=titulo;
       }
   
     });
+    
     return await modal.present();
   }
+
+  cargarDatos(event){
+    console.log('cargarDatos',event);
+     
+  
+     }
 
 }

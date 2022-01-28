@@ -11,6 +11,8 @@ import { ModalController } from '@ionic/angular';
 export class ParesComponent implements OnInit {
   @Input() peliculas:Result[]=[];
   @Output() masPelis=new EventEmitter();
+  //para actualizar los datos cuando cambiamos en el modal, emitimos un evento en el dismiss
+@Output() load = new EventEmitter<boolean>();
 
 
   slideOpts={
@@ -41,6 +43,10 @@ export class ParesComponent implements OnInit {
         peli
       }
   
+    });
+    //aqui lo llamamos y lo emitimos
+    modal.onDidDismiss().then(data => {
+      this.load.emit(true);
     });
     return await modal.present();
   }

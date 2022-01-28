@@ -1,7 +1,9 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { Result, PeliculaDetalle, CreditosDetalle, Cast } from '../../interfaces/index';
 import { PeliculasService } from '../../services/peliculas.service';
-import { ModalController } from '@ionic/angular';
+import { ModalController, ToastController } from '@ionic/angular';
+import { DataLocalService } from '../../services/data-local.service';
+import { Tab3Page } from '../../pages/tab3/tab3.page';
 
 @Component({
   selector: 'app-detalle-peli',
@@ -11,12 +13,14 @@ import { ModalController } from '@ionic/angular';
 
  
 export class DetallePeliComponent implements OnInit {
-  
+  iconoFavoritos:string;
 
   //variables
   detalles:PeliculaDetalle={};
   creditosDetalle:Cast[];
   @Input() peli:Result;
+  @Output() cambiosModal=false;
+  
   textoOculto=150;
   toggleLeer='Leer más';
 
@@ -32,10 +36,19 @@ export class DetallePeliComponent implements OnInit {
   
 
   constructor(private peliculasServicio:PeliculasService,
-    private modalController:ModalController) { }
+    private modalController:ModalController,
+    private datalocal:DataLocalService,
+    // private pagFavoritos:Tab3Page
+    
+    ) { }
 
-  ngOnInit() {
-    console.log(this.peli.id);
+   ngOnInit() {
+
+    //comprobamos si existe la pelicula
+      this.datalocal.existePelicula(this.peli.id).then(existe => this.iconoFavoritos =(existe)?'heart':'heart-outline');
+     
+    
+    
     this.peliculasServicio.getPeliculaDetalle(this.peli.id).subscribe(
       resp=>{
         this.detalles=resp;
@@ -70,7 +83,17 @@ export class DetallePeliComponent implements OnInit {
     this.modalController.dismiss();
   }
   favorito(){
+    const existe=this.datalocal.set(this.peli);
+    this.iconoFavoritos =(existe)?'heart':'heart-outline';
+    // this.pagFavoritos=new Tab3Page(this.datalocal);
+    // this.pagFavoritos.probar();
+    this.cambiosModal=true;
+
+  
 
   }
+
+
+  
 
 }

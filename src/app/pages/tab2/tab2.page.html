@@ -37,7 +37,7 @@
   <ion-grid fixed>
     <ion-row>
       <ion-col size="6" *ngFor="let pelicula of peliculasEncontradas">
-        <ion-card (click)="modalDetalle(pelicula)">
+        <ion-card (click)="modalDetalle(pelicula)" (load)="cargarDatos($event)">
           <img [src]="pelicula.poster_path|imagen2" >
         </ion-card>
         <ion-card-subtitle>{{pelicula.title}}</ion-card-subtitle>

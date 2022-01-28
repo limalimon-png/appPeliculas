@@ -11,9 +11,11 @@ const lenguaje:string='languaje=es&include_image_languaje=es';
 })
 export class PeliculasService {
   private popularesPage:number=1;
+  generos:any[]=[];
 
   constructor(private http:HttpClient) { }
   
+
 
 
 
@@ -44,5 +46,22 @@ export class PeliculasService {
   getBusqueda(query :string){
     return this.http.get<Cartelera>(`${environment.url}/search/movie?query=${query}&api_key=${environment.apiKey}`);
   }
+
+  getBusquedaPorGenero():Promise<any[]>{
+
+    return new Promise(resolve =>{
+      this.http.get<Cartelera>(`${environment.url}/genre/movie/list?api_key=${environment.apiKey}`).subscribe(
+       resp=>{
+       this.generos=resp['genres'];
+       console.log(this.generos);
+       resolve(this.generos)
+       }
+ 
+     );
+
+
+    });
+  }
+  
   
 }

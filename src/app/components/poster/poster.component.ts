@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Result } from '../../interfaces/index';
 import { DetallePeliComponent } from '../detalle-peli/detalle-peli.component';
 import { ModalController } from '@ionic/angular';
@@ -11,6 +11,10 @@ import { ModalController } from '@ionic/angular';
 export class PosterComponent implements OnInit {
 @Input() peliculas:Result[]=[];
 
+//para actualizar los datos cuando cambiamos en el modal, emitimos un evento en el dismiss
+@Output() load = new EventEmitter<boolean>();
+
+
 slideOpts={
 slidesPerView:3.3,
 freeMode:true,
@@ -20,6 +24,7 @@ spaceBetween: -10
 
   ngOnInit() {}
   async modalDetalle(peli) {
+
     const modal = await this.modalController.create({
       component: DetallePeliComponent,
       componentProps:{
@@ -27,6 +32,12 @@ spaceBetween: -10
       }
   
     });
+
+    //aqui lo llamamos y lo emitimos
+    modal.onDidDismiss().then(data => {
+      this.load.emit(true);
+    });
+
     return await modal.present();
   }
 
